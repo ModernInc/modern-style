@@ -1,0 +1,116 @@
+=box-sizing($boxmodal: border-box)
+    -webkit-box-sizing: $boxmodal
+    -moz-box-sizing: $boxmodal
+    box-sizing: $boxmodal
+
+=background-size($bg-size)
+    -webkit-background-size: $bg-size
+    -moz-background-size: $bg-size
+    -o-background-size: $bg-size
+    background-size: $bg-size
+
+=flexflow($flex-direction, $flex-wrap)
+    -webkit-flex-flow: $flex-direction $flex-wrap
+    -moz-flex-flow: $flex-direction $flex-wrap
+    flex-flow: $flex-direction $flex-wrap
+
+=flexbasis($flex-basis)
+    -webkit-flex-basis: $flex-basis
+    -moz-flex-flex-basis: $flex-basis
+    flex-basis: $flex-basis
+
+=order($order)
+    -webkit-order: $order
+    -moz-order: $order
+    -ms-order: $order
+    -o-order: $order
+    order: $order
+
+=alignitems($align-items)
+    -webkit-align-items: $align-items
+    -moz-flex-align-items: $align-items
+    align-items: $align-items
+
+=declare-font-face($font-family, $font-filename, $font-weight: normal, $font-style: normal, $font-stretch: normal)
+    @font-face
+        font-family: #{$font-family}
+        src: url(font-path("#{$font-filename}.eot"))
+        src: url(font-path("#{$font-filename}.eot?#iefix")) format("embedded-opentype"), url(font-path("#{$font-filename}.woff")) format("woff"), url(font-path("#{$font-filename}.ttf")) format("truetype"), url(font-path("#{$font-filename}.svg##{$font-filename}")) format("svg")
+        font-weight: $font-weight
+        font-style: $font-style
+        font-stretch: $font-stretch
+
+=input-color($color)
+    &::-webkit-input-placeholder
+        color: $color
+
+    &:-moz-placeholder
+        color: $color
+
+    &::-moz-placeholder
+        color: $color
+
+    &:-ms-input-placeholder
+        color: $color
+
+=position($top: 0, $right: 0, $bottom: 0, $left: 0)
+    @if $top != initial
+        top: $top
+
+    @if $right != initial
+        right: $right
+
+    @if $bottom != initial
+        bottom: $bottom
+
+    @if $left != initial
+        left: $left
+
+=keyframes($name)
+    @-webkit-keyframes #{$name}
+        @content
+
+    @-moz-keyframes #{$name}
+        @content
+
+    @-o-keyframes #{$name}
+        @content
+
+    @keyframes #{$name}
+        @content
+
+=animation-name($name)
+    @each $prefix in (-webkit-, -moz-, -o-)
+        #{$prefix}animation-name: $name
+
+    animation-name: $name
+
+=animation-timing-function($timing-function)
+    @each $prefix in (-webkit-, -moz-, -o-)
+        #{$prefix}animation-timing-function: $timing-function
+
+    animation-timing-function: $timing-function
+
+=animation-iteration-count($iteration-count)
+    @each $prefix in (-webkit-, -moz-, -o-)
+        #{$prefix}animation-iteration-count: $iteration-count
+
+    animation-iteration-count: $iteration-count
+
+=animation-duration($duration)
+    @each $prefix in (-webkit-, -moz-, -o-)
+        #{$prefix}animation-duration: $duration
+
+    animation-duration: $duration
+
+=animation-delay($delay)
+    @each $prefix in (-webkit-, -moz-, -o-)
+        #{$prefix}animation-delay: $delay
+
+    animation-delay: $delay
+
+=radial-gradient($gradient)
+    @each $prefix in (-webkit-, -moz-, -o-)
+        background-image: #{$prefix}radial-gradient(unquote($gradient))
+
+    background-image: radial-gradient(unquote($gradient))
