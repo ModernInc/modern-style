@@ -1,34 +1,35 @@
-modern-style
-============
-
+# modern-style
 
 Style layout within a selector.
 
-===== Background ======
+### Background
 Shorthand first, followed by color and then image properties based on their relationship to the box model.
 
-background – I don't like this shorthand
-background-color
-background-image
+- `background` – I don't like this shorthand
+- `background-color`
+- `background-image`
 
-background-attachment
-background-repeat
-background-position
-background-origin
-background-size
-background-clip
+- `background-attachment`
+- `background-repeat`
+- `background-position`
+- `background-origin`
+- `background-size`
+- `background-clip`
 
-// Some Browser support - Use with discretion
-filter
+**Some Browser support - Use with discretion**
 
-===== Typography =====
-// Properties located in partials
-@font-face
-font-family
-font-size
-color
+- `filter`
 
-// Font File.
+### Typography
+**Properties located in partials**
+
+- `@font-face`
+- `font-family`
+- `font-size`
+- `color`
+
+### Font File
+```
 @font-face
     font – I don't like this shorthand
     font-family
@@ -36,164 +37,162 @@ color
     font-style
     font-variant
     font-variant-ligatures
-font-feature-settings
+```
+- `font-feature-settings`
 
-// Modifying font.
-font-size
-line-height
-letter-spacing
-word-spacing
-color
+### Modifying font
+- `font-size`
+- `line-height`
+- `letter-spacing`
+- `word-spacing`
+- `color`
 
-// Int support
-writing-mode
-unicode-bidi
-direction
+### Int support
+- `writing-mode`
+- `unicode-bidi`
+- `direction`
 
-// Modifying behavior.
-text-transform
-text-decoration
-text-align
-text-align-last
-vertical-align
-text-indent
-text-shadow
-word-break
-word-wrap
-text-overflow
+### Modifying behavior
+- `text-transform`
+- `text-decoration`
+- `text-align`
+- `text-align-last`
+- `vertical-align`
+- `text-indent`
+- `text-shadow`
+- `word-break`
+- `word-wrap`
+- `text-overflow`
 
-// Modifying punctuation.
-quotes
-hanging-punctuation
-tab-size
-white-space
+### Modifying punctuation
+- `quotes`
+- `hanging-punctuation`
+- `tab-size`
+- `white-space`
 
-// Modifying Lists
-list-style
-counter-increment
-counter-reset
+### Modifying Lists
+- `list-style`
+- `counter-increment`
+- `counter-reset`
 
-// Some Browser support - Use with discretion
-orphans
+### Some Browser support - Use with discretion
+- `orphans`
 
+### Low Browser Support - Don't use
+- `hyphens`
+- `line-break`
+- `text-combine-upright`
+- `text-justify`
+- `@font-feature-values`
+- `font-kerning`
+- `font-language-override`
+- `font-size-adjust`
+- `font-stretch`
+- `font-synthesis`
+- `font-variant-alternates`
+- `font-variant-caps`
+- `font-variant-east-asian`
+- `font-variant-numeric`
+- `font-variant-position`
+- `text-orientation`
+- `text-underline-position`
+- `ime-mode`
 
-// Low Browser Support - Don't use
-hyphens
-line-break
-text-combine-upright
-text-justify
-@font-feature-values
-font-kerning
-font-language-override
-font-size-adjust
-font-stretch
-font-synthesis
-font-variant-alternates
-font-variant-caps
-font-variant-east-asian
-font-variant-numeric
-font-variant-position
-text-orientation
-text-underline-position
-ime-mode
+## Display
+### Properties located in partials
+- `z-index`
 
-===== Display =====
-// Properties located in partials
-z-index
+### box-sizing
+- `display` - when not flex
+- `box-decoration-break`
 
-box-sizing
-display - when not flex
-box-decoration-break
+- `overflow`
+- `overflow-x`
+- `overflow-y`
+- `overflow-wrap`
 
-overflow
-overflow-x
-overflow-y
-overflow-wrap
+- `opacity`
+- `visibility`
 
-opacity
-visibility
+- `cursor`
+- `resize`
 
-cursor
-resize
+- `page-break`
 
-page-break
+## Flex
+### Parent
+- `display` - when flex
+- `flex-flow`
+- `justify-content`
+- `align-items`
+- `align-content`
 
-===== Flex =====
+### Child
+- `order`
+- `flex`
+- `align-self`
 
-// Parent
-display - when flex
-flex-flow
-justify-content
-align-items
-align-content
-
-// Child
-order
-flex
-align-self
-
-===== Column =====
+## Column
 Needs more browser support
 
-===== Table =====
-caption-side
-empty-cells
-table-layout
+## Table
+- `caption-side`
+- `empty-cells`
+- `table-layout`
 
-===== Float =====
-float
-@extend %clearfix
+## Float
+- `float`
+- `@extend %clearfix`
 
 Don't use clear, use %clearfix
 
-===== Position =====
-@extend %position-(type)
-+position(top, right, bottom, left) - initial = null
-@extend %position - 0, 0, 0, 0
+## Position
+- `@extend %position-(type)`
+- `+position(top, right, bottom, left)` - initial = null
+- `@extend %position - 0, 0, 0, 0`
 
-===== Margin =====
-margin
+## Margin
+- `margin`
 
-===== Border =====
-box-shadow
-outline
-border
-border-radius
-border-collapse
-border-spacing
+## Border
+- `box-shadow`
+- `outline`
+- `border`
+- `border-radius`
+- `border-collapse`
+- `border-spacing`
 
-===== Height / Width =====
-max-height
-min-height
-height
-max-width
-min-width
-width
+## Height / Width
+- `max-height`
+- `min-height`
+- `height`
+- `max-width`
+- `min-width`
+- `width`
 
-===== Padding =====
-padding
+## Padding
+- `padding`
 
-===== Transform =====
-transform
-perspective
-backface-visibility
+## Transform
+- `transform`
+- `perspective`
+- `backface-visibility`
 
-===== Transitions =====
-transition
+## Transitions
+- `transition`
 
-===== Animation =====
+## Animation
 In it's own partial
 
-
+```sass
 ::before
     @extend %content
+```
 
+```sass
 ::after
     @extend %content
+```
 
-:hover
-
-:active
-
-
-
+- `:hover`
+- `:active`
