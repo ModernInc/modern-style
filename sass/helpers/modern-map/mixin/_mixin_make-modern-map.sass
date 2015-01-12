@@ -1,0 +1,613 @@
+=make-modern-map($value, $property)
+    // Grab the selector
+    $selector: &
+
+    // Sanatizing the $selector.
+    $selector: sanatize($selector)
+
+    // Sanatizing the $value for things like calc().
+    $value: sanatize($value)
+
+    // Sanatizing the $property
+    $property: sanatize($property)
+
+    // Sanatizing the $media
+    $media-name: sanatize($media-name)
+
+    @if $debug-modern-map
+        @debug start of modern-map
+        @debug $media-name media-name
+        @debug $selector selector
+        @debug $property property
+        @debug $value value
+
+
+
+
+    @if modern-map($modern-map, $media-name)
+        //**************************************************//
+        //                                                  //
+        // Check if out $media query size is in our map.    //
+        //                                                  //
+        //**************************************************//
+
+        @if $debug-modern-map
+            @debug modern-map has our $media-name key
+
+        // Get the values from $modern-map via the $media-name key
+        $media-name-value: modern-map($modern-map, $media-name)
+
+        // Call map-search function to search throuh our $media-name-value
+        // for our $property
+        $property-value-list: map-search($media-name-value, $property)
+
+
+
+
+
+        @if $property-value-list
+            //**************************************************//
+            //                                                  //
+            // Check if our $property is in our                 //
+            // $media-name-value.                               //
+            //                                                  //
+            //**************************************************//
+
+            @if $debug-modern-map
+                @debug media-name-value has our $property key
+
+            // Grab the type of $media-name-value from out $property-value-list.
+            $media-name-value-type: nth($property-value-list, 1)
+
+            // Grab $property-value from out $property-value-list
+            $property-value: nth($property-value-list, 2)
+
+
+
+
+            @if $media-name-value-type == list
+                //**************************************************//
+                //                                                  //
+                // $media-name-value is a list.                     //
+                //                                                  //
+                //**************************************************//
+
+                @if $debug-modern-map
+                    @debug media-name-value is a $media-name-value-type
+
+                // Grab the index of our $property-value from our $property-value-list
+                $property-value-index: nth($property-value-list, 3)
+
+                @if $debug-modern-map
+                    @debug nth($media-name-value, $property-value-index)
+
+                    @debug $property-value
+
+                // Call map-search function to search throuh our $property-value
+                // for our $value
+                $value-value-list: map-search($property-value, $value)
+
+
+
+
+                @if $value-value-list
+                    //**************************************************//
+                    //                                                  //
+                    // Check if our $value is in our $property-value.   //
+                    //                                                  //
+                    //**************************************************//
+
+                    @if $debug-modern-map
+                        @debug property-value has our $value key
+
+                    // Grab the type of $value-value from out $value-value-list.
+                    $value-value-type: nth($value-value-list, 1)
+
+                    // Grab $value-value from out $value-value-list
+                    $value-value: nth($value-value-list, 2)
+
+
+
+
+                    @if $value-value-type == list
+                        //**************************************************//
+                        //                                                  //
+                        // $value-value is a list.                          //
+                        //                                                  //
+                        //**************************************************//
+
+                        @if $debug-modern-map
+                            @debug value-value is a $value-value-type
+
+
+
+
+                        @if type-of($value-value) == list
+                            //**************************************************//
+                            //                                                  //
+                            // $value-value is a list.                          //
+                            //                                                  //
+                            //**************************************************//
+
+                            // Append $value-value with $selector.
+                            $value-value: append($value-value, $selector, comma)
+
+
+
+
+                        @else
+                            //**************************************************//
+                            //                                                  //
+                            // $value-value is a string.                        //
+                            //                                                  //
+                            //**************************************************//
+
+                            // Make a valid list out of $value-value, and $selector.
+                            $value-value: $value-value, $selector
+
+
+
+
+                        @if $debug-modern-map
+                            @debug $value-value value-value post adding new value
+
+                        $property-value: set-nth($property-value, nth($value-value-list, 3), ($value: $value-value))
+
+                        @if $debug-modern-map
+                            @debug $property-value property-value post adding new value
+
+                        $media-name-value: set-nth($media-name-value, $property-value-index,($property: $property-value))
+
+                        @if $debug-modern-map
+                            @debug $media-name-value media-name-value post adding new values
+
+                        // Merge in our $media-name: $media-name-value into our $modern-map
+                        $modern-map: map-merge($modern-map, ($media-name: $media-name-value)) !global
+
+                        @if $debug-modern-map
+                            @debug $modern-map modern-map post adding new values
+
+
+
+
+
+
+                    @else if $value-value-type == map
+                        //**************************************************//
+                        //                                                  //
+                        // $value-value is a map.                           //
+                        //                                                  //
+                        //**************************************************//
+
+                        @if $debug-modern-map
+                            @debug value-value is a $value-value-type
+
+
+
+
+                        @if type-of($value-value) == string
+                            //**************************************************//
+                            //                                                  //
+                            // $value-value is a string.                        //
+                            //                                                  //
+                            //**************************************************//
+
+                            // Make a list out of $value-value and our $selector
+                            $value-value: ($value-value, $selector)
+
+
+
+
+                        @else
+                            //**************************************************//
+                            //                                                  //
+                            // $value-value is a list.                          //
+                            //                                                  //
+                            //**************************************************//
+
+                            // Append $value-value with new $selector
+                            $value-value: append($value-value, $selector, comma)
+
+
+
+
+
+                        @if $debug-modern-map
+                            @debug $value-value value-value post adding new value
+
+                        $property-value: ($value: $value-value)
+
+                        @if $debug-modern-map
+                            @debug $property-value property-value post adding new value
+
+                        $media-name-value: set-nth($media-name-value, $property-value-index,($property: $property-value))
+
+                        @if $debug-modern-map
+                            @debug $media-name-value media-name-value post adding new values
+
+                        // Merge in our $media-name: $media-name-value into our $modern-map
+                        $modern-map: map-merge($modern-map, ($media-name: $media-name-value)) !global
+
+                        @if $debug-modern-map
+                            @debug $modern-map modern-map post adding new values
+
+
+
+
+                @else
+                    //**************************************************//
+                    //                                                  //
+                    // $value is not in $property-value                 //
+                    //                                                  //
+                    //**************************************************//
+
+                    @if $debug-modern-map
+                        @debug property-value doesnt have our $value key
+
+                    // Make $value-value our $selector
+                    $value-value: $selector
+
+                    @if $debug-modern-map
+                        @debug $value-value value-value post adding new value
+
+
+
+
+                    @if type-of($property-value) == list
+                        //**************************************************//
+                        //                                                  //
+                        // $property-value is a list.                       //
+                        //                                                  //
+                        //**************************************************//
+
+                        // Append $property-value with $value: $value-value
+                        $property-value: append($property-value, ($value: $value-value), comma)
+
+
+
+
+                    @else
+                        //**************************************************//
+                        //                                                  //
+                        // $property-value is a list.                       //
+                        //                                                  //
+                        //**************************************************//
+
+                        // Make a list out of $property-value, $value: $value-value
+                        $property-value: ($property-value, ($value: $value-value))
+
+
+
+
+
+                    @if $debug-modern-map
+                        @debug $property-value property-value post adding new value
+
+                    $media-name-value: set-nth($media-name-value, $property-value-index,($property: $property-value))
+
+                    @if $debug-modern-map
+                        @debug $media-name-value media-name-value post adding new values
+
+                    // Merge in our $media-name: $media-name-value into our $modern-map
+                    $modern-map: map-merge($modern-map, ($media-name: $media-name-value)) !global
+
+                    @if $debug-modern-map
+                        @debug $modern-map modern-map post adding new values
+
+
+
+
+
+            @else if $media-name-value-type == map
+                //**************************************************//
+                //                                                  //
+                // $media-name-value is a map.                      //
+                //                                                  //
+                //**************************************************//
+
+                @if $debug-modern-map
+                    @debug media-name-value is a $media-name-value-type
+
+                // Call map-search function to search throuh our $property-value
+                // for our $value
+                $value-value-list: map-search($property-value, $value)
+
+
+
+
+                @if $value-value-list
+                    //**************************************************//
+                    //                                                  //
+                    // Check if our $value is in our $property-value.   //
+                    //                                                  //
+                    //**************************************************//
+
+                    @if $debug-modern-map
+                        @debug property-value has our $value key
+
+                    // Grab the type of $value-value from out $value-value-list.
+                    $value-value-type: nth($value-value-list, 1)
+
+                    // Grab $value-value from out $value-value-list
+                    $value-value: nth($value-value-list, 2)
+
+
+
+
+                    @if $value-value-type == list
+                        //**************************************************//
+                        //                                                  //
+                        // $value-value is a list.                          //
+                        //                                                  //
+                        //**************************************************//
+
+                        @if $debug-modern-map
+                            @debug value-value is a $value-value-type
+
+
+
+
+                        @if type-of($value-value) == string
+                            //**************************************************//
+                            //                                                  //
+                            // $value-value is a string.                        //
+                            //                                                  //
+                            //**************************************************//
+
+                            // Make a list out of $value-value and our $selector
+                            $value-value: ($value-value, $selector)
+
+
+
+
+                        @else
+                            //**************************************************//
+                            //                                                  //
+                            // $value-value is a list.                          //
+                            //                                                  //
+                            //**************************************************//
+
+                            // Append $value-value with new $selector
+                            $value-value: append($value-value, $selector, comma)
+
+
+
+
+
+                        @if $debug-modern-map
+                            @debug $value-value value-value post adding new value
+
+                        $property-value: set-nth($property-value,  nth($value-value-list, 3),($value: $value-value))
+
+                        @if $debug-modern-map
+                            @debug $property-value property-value post adding new value
+
+                        $media-name-value: map-merge($media-name-value, ($property: $property-value))
+
+                        @if $debug-modern-map
+                            @debug $media-name-value media-name-value post adding new values
+
+                        // Merge in our $media-name: $media-name-value into our $modern-map
+                        $modern-map: map-merge($modern-map, ($media-name: $media-name-value)) !global
+
+                        @if $debug-modern-map
+                            @debug $modern-map modern-map post adding new values
+
+
+
+
+
+
+                    @else if $value-value-type == map
+                        //**************************************************//
+                        //                                                  //
+                        // $value-value is a map.                           //
+                        //                                                  //
+                        //**************************************************//
+
+                        @if $debug-modern-map
+                            @debug value-value is a $value-value-type
+
+
+
+
+                        @if type-of($value-value) == string
+                            //**************************************************//
+                            //                                                  //
+                            // $value-value is a string.                        //
+                            //                                                  //
+                            //**************************************************//
+
+                            // Make a list out of $value-value and our $selector
+                            $value-value: ($value-value, $selector)
+
+
+
+
+                        @else
+                            //**************************************************//
+                            //                                                  //
+                            // $value-value is a list.                          //
+                            //                                                  //
+                            //**************************************************//
+
+                            // Append $value-value with new $selector
+                            $value-value: append($value-value, $selector, comma)
+
+
+
+
+
+                        @if $debug-modern-map
+                            @debug $value-value value-value post adding new value
+
+                        $property-value: ($value: $value-value)
+
+                        @if $debug-modern-map
+                            @debug $property-value property-value post adding new value
+
+                        $media-name-value: map-merge($media-name-value, ($property: $property-value))
+
+                        @if $debug-modern-map
+                            @debug $media-name-value media-name-value post adding new values
+
+                        // Merge in our $media-name: $media-name-value into our $modern-map
+                        $modern-map: map-merge($modern-map, ($media-name: $media-name-value)) !global
+
+                        @if $debug-modern-map
+                            @debug $modern-map modern-map post adding new values
+
+
+
+
+                @else
+                    //**************************************************//
+                    //                                                  //
+                    // $value is not in $property-value                 //
+                    //                                                  //
+                    //**************************************************//
+
+                    @if $debug-modern-map
+                        @debug property-value doesnt have our $value key
+
+                    // Make $value-value our $selector
+                    $value-value: $selector
+
+                    @if $debug-modern-map
+                        @debug $value-value value-value post adding new value
+
+
+
+
+                    @if type-of($property-value) == list
+                        //**************************************************//
+                        //                                                  //
+                        // $property-value is a list.                       //
+                        //                                                  //
+                        //**************************************************//
+
+                        // Append $value: $value-value to $property-value
+                        $property-value: append($property-value, ($value: $value-value), comma)
+
+
+
+
+                    @else
+                        //**************************************************//
+                        //                                                  //
+                        // $property-value is not a list.                   //
+                        //                                                  //
+                        //**************************************************//
+
+                        // Make a list out of $property-value and $value: $value-value
+                        $property-value: ($property-value, ($value: $value-value))
+
+                    @if $debug-modern-map
+                        @debug $property-value property-value post adding new value
+
+                    $media-name-value: map-merge($media-name-value, ($property: $property-value))
+
+                    @if $debug-modern-map
+                        @debug $media-name-value media-name-value post adding new values
+
+                    // Merge in our $media-name: $media-name-value into our $modern-map
+                    $modern-map: map-merge($modern-map, ($media-name: $media-name-value)) !global
+
+                    @if $debug-modern-map
+                        @debug $modern-map modern-map post adding new values
+
+
+
+
+
+        @else
+            //**************************************************//
+            //                                                  //
+            // $property is not in $media-name-value            //
+            //                                                  //
+            //**************************************************//
+
+            @if $debug-modern-map
+                @debug media-name-value doesnt have our $property key
+
+            // Make $value-value our $selector
+            $value-value: $selector
+
+            @if $debug-modern-map
+                @debug $value-value value-value post adding new value
+
+            $property-value: ($value: $value-value)
+
+            @if $debug-modern-map
+                @debug $property-value property-value post adding new value
+
+
+
+
+            @if type-of($media-name-value) == list
+                //**************************************************//
+                //                                                  //
+                // $media-name-value is a list.                     //
+                //                                                  //
+                //**************************************************//
+
+                // Append out $property: $property-value to $media-name-value
+                $media-name-value: append($media-name-value, ($property: $property-value), comma)
+
+
+
+
+
+            @else
+                //**************************************************//
+                //                                                  //
+                // $media-name-value is not a list.                 //
+                //                                                  //
+                //**************************************************//
+
+                // Make a list out of $media-name-value and $property: $property-value
+                $media-name-value: $media-name-value, ($property: $property-value)
+
+
+
+
+
+            @if $debug-modern-map
+                @debug $media-name-value media-name-value post adding new values
+
+            // Merge in our $media-name: $media-name-value into our $modern-map
+            $modern-map: map-merge($modern-map, ($media-name: $media-name-value)) !global
+
+            @if $debug-modern-map
+                @debug $modern-map modern-map post adding new values
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @else
+        // Our $media query size is not in our map.
+
+        @if $debug-modern-map
+            @debug modern-map doesnt have $media-name key
+
+        // Make a $map with our $property: ($value: $selector)
+        $map: ($media-name: ($property: ($value: $selector)))
+
+        // Merge $map into $modern-map, make it global
+        $modern-map: map-merge($modern-map, $map) !global
+
+        @if $debug-modern-map
+            @debug $modern-map map if media isnt in modern-map
+
+    @if $debug-modern-map
+        @debug "*************************************************"

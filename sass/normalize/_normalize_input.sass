@@ -1,0 +1,41 @@
+#{$element}
+    +font(inherit)
+    +line-height(normal)
+    +color(inherit)
+
+    +margin(0)
+
+    &::-moz-focus-inner
+        +border(0)
+
+        +padding(0)
+
+    &[type="reset"]
+        +cursor(pointer)
+        +appearance(button)
+
+    &[type="submit"]
+        +cursor(pointer)
+        +appearance(button)
+
+    &[type="checkbox"]
+        +padding(0)
+
+    &[type="radio"]
+        +padding(0)
+
+    &[type="number"]::-webkit-inner-spin-button
+        +height(auto)
+
+    &[type="number"]::-webkit-outer-spin-button
+        +height(auto)
+
+    [type="search"]
+        +appearance(textfield)
+        +box-sizing(content-box)
+
+        &::-webkit-search-cancel-button
+            +appearance(none)
+
+        &::-webkit-search-decoration
+            +appearance(none)

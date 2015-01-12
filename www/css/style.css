@@ -1,0 +1,173 @@
+a:active, a:hover {
+  outline: 0;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+audio, canvas, progress, video {
+  display: inline-block;
+}
+
+audio:not([controls]), [hidden], template {
+  display: none;
+}
+
+audio, canvas, progress, sub, sup, video {
+  vertical-align: baseline;
+}
+
+audio:not([controls]), hr {
+  height: 0;
+}
+
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+b, optgroup, strong {
+  font-weight: bold;
+}
+
+body, button, input, optgroup, select, textarea, select {
+  margin: 0;
+}
+
+button, input, optgroup, select, textarea, select {
+  font: inherit;
+}
+
+button, input, optgroup, select, textarea, select {
+  color: inherit;
+}
+
+button, select, select {
+  text-transform: none;
+}
+
+pre, textarea {
+  overflow: auto;
+}
+
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+  cursor: pointer;
+}
+
+button [disabled], html input[disabled] {
+  cursor: default;
+}
+
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+  appearance: button;
+}
+
+input [type="search"]::-webkit-search-cancel-button, input [type="search"]::-webkit-search-decoration {
+  appearance: none;
+}
+
+button::-moz-focus-inner, img, input::-moz-focus-inner, legend {
+  border: 0;
+}
+
+button::-moz-focus-inner, input::-moz-focus-inner, input[type="checkbox"], input[type="radio"], legend, td, th {
+  padding: 0;
+}
+
+code, kbd, pre, samp {
+  font-family: monospace, monospace;
+}
+
+code, kbd, pre, samp {
+  font-size: 1em;
+}
+
+sub, sup {
+  font-size: 75%;
+}
+
+hr, input [type="search"] {
+  box-sizing: content-box;
+}
+
+sub, sup {
+  line-height: 0;
+}
+
+sub, sup {
+  position: relative;
+}
+
+a {
+  background-color: transparent;
+}
+
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+fieldset {
+  margin: 0 2px;
+  border: 1px solid #c0c0c0;
+  padding: 0.35em 0.625em 0.65em;
+}
+
+figure {
+  margin: 1em 40px;
+}
+
+h1 {
+  margin: 0.67em 0;
+  font-size: 2em;
+}
+
+mark {
+  color: #000;
+  background: #ff0;
+}
+
+button {
+  overflow: visible;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+input [type="search"] {
+  appearance: textfield;
+}
+
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+}
+
+small {
+  font-size: 80%;
+}
+
+dfn {
+  font-style: italic;
+}
+
+input {
+  line-height: normal;
+}
+
+sub {
+  bottom: -0.25rem;
+}
+
+sup {
+  top: -0.5em;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -104,6 +104,7 @@ Shorthand first, followed by color and then image properties based on their rela
 
 ### box-sizing
 - `display` - when not flex
+- `appearance`
 - `box-decoration-break`
 
 - `overflow`

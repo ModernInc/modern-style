@@ -1,0 +1,569 @@
+@function sanatize($var)
+    $var: "#{$var}"
+    @return $var
+
+@function modern-map($modern-map, $media-name)
+    @if map-has-key($modern-map, $media-name)
+        // Check if out $media query size is in our map.
+
+        @if $debug-modern-map
+            @debug modern-map has $media-name media-name key
+
+        // Get the values from $modern-map via the $media-name key
+        $media-name-value: map-get($modern-map, $media-name)
+
+        @if $debug-modern-map
+            @debug $media-name-value media-name-value pre adding new values
+
+        @return $media-name-value
+
+    @else
+        @return false
+
+@function map-search($map, $value)
+
+    // Grab the type of $map
+    $type: type-of($map)
+
+
+    @if $type == list
+        // If it's a list we need to for loop throug to get to the map-has key.
+
+        @if $debug-modern-map
+            @debug map is a $type
+
+        // Get length of $map
+        $length-of-map: length($map)
+
+        $found: false
+
+        @for $i from 1 through $length-of-map
+
+            @if map-has-key(nth($map, $i), $value)
+                // Check if $property is in $media-name-value
+
+                @if $debug-modern-map
+                    @debug map has our $value value in it
+
+                // Get the values from $map via the $value key
+                $value-map: map-get(nth($map, $i), $value)
+
+                @if $debug-modern-map
+                    @debug $map map pre adding new values
+
+                $found: true
+
+                @return (list, $value-map, $i)
+
+        @if $found == false
+
+            @return false
+
+    @else
+        @if $debug-modern-map
+            @debug map is a $type
+
+        @if map-has-key($map, $value)
+            // Check if $value is in $map
+
+            @if $debug-modern-map
+                @debug map has our $value value in it
+
+            // Get the values from $media-name-value via the $media-name key
+            $value-map: map-get($map, $value)
+
+            @if $debug-modern-map
+                @debug $map map pre adding new values
+
+            @return (map, $value-map)
+
+        @else
+            @return false
+
+=test($media-name-value)
+    // Grab the type of $media-name-value
+    $type: type-of($media-name-value)
+
+
+
+
+    @if $type == map
+        //**************************************************//
+        //                                                  //
+        // Check if $media-name-value is a map. If so we    //
+        // can dive right in with map functions.            //
+        //                                                  //
+        //**************************************************//
+
+
+
+
+        @if $debug-decompile-map
+            @debug media-name-value is a $type
+
+
+
+
+        //**************************************************//
+        //                                                  //
+        // Cycling through $media-name-value and grabbing   //
+        // the $property names to start building our out    //
+        // put selectors.                                   //
+        //                                                  //
+        //**************************************************//
+        @each $property in map-keys($media-name-value)
+
+            // Get the key, $property-value from our map, $media-name-value, via our value, $property.
+            $property-value: map-get($media-name-value, $property)
+
+            @if $debug-decompile-map
+                @debug $property-value property-value
+
+            // Grab the type of $property-value
+            $type: type-of($property-value)
+
+
+
+
+            @if $type == map
+                //**************************************************//
+                //                                                  //
+                // Check if $property-value is a map. If so we can  //
+                // dive right in with map functions.                //
+                //                                                  //
+                //**************************************************//
+
+                @if $debug-decompile-map
+                    @debug property-value is a $type
+
+
+
+
+                @each $value in map-keys($property-value)
+                    //**************************************************//
+                    //                                                  //
+                    // Cycling through $property-value and grabbing the //
+                    // $value names to start building our output        //
+                    // selectors.                                       //
+                    //                                                  //
+                    //**************************************************//
+
+                    // Get the key, $selector from our map, $property-value, via our value, $value.
+                    $selector: map-get($property-value, $value)
+
+                    @if $debug-decompile-map
+                        @debug $selector value-value
+
+                    // Grab the type of $property-value
+                    $type: type-of($selector)
+
+
+
+
+                    @if $type == string
+                        //**************************************************//
+                        //                                                  //
+                        // If out $selector is a string, it's an orphan.    //
+                        //                                                  //
+                        //**************************************************//
+
+                        // Call our orphan mixin to add it to the orphan train!
+                        +orphan($selector, $property, $value, $media-name)
+
+
+
+
+                    @else
+                        //**************************************************//
+                        //                                                  //
+                        // If out $selector is not a string, output it.     //
+                        //                                                  //
+                        //**************************************************//
+
+                        // Interpoolate out our $selector list with it's unique $property: $value.
+                        #{$selector}
+                            #{$property}: #{$value}
+
+
+
+
+            @else
+                //**************************************************//
+                //                                                  //
+                // $property-value is a list. We need to do a for   //
+                // loop so we can get to the map.                   //
+                //                                                  //
+                //**************************************************//
+
+                @if $debug-decompile-map
+                    @debug property-value is a $type
+
+
+
+
+                //**************************************************//
+                //                                                  //
+                // For loop to cycle through all the maps in our    //
+                // $property-value list.                            //
+                //                                                  //
+                //**************************************************//
+                @for $i from 1 through length($property-value)
+
+
+
+
+                    //**************************************************//
+                    //                                                  //
+                    // Cycling through $property-value list via $i      //
+                    // and grabbing the $value names to start building  //
+                    // our output selectors.                            //
+                    //                                                  //
+                    //**************************************************//
+                    @each $value in map-keys(nth($property-value, $i))
+
+                        // Get the key, $selector from our list, $property-value index $i, via our value, $value.
+                        $selector: map-get(nth($property-value, $i), $value)
+
+                        @if $debug-decompile-map
+                            @debug $selector value-value
+
+                        // Grab the type of $selector
+                        $type: type-of($selector)
+
+
+
+
+                        @if $type == string
+                            //**************************************************//
+                            //                                                  //
+                            // If out $selector is a string, it's an orphan.    //
+                            //                                                  //
+                            //**************************************************//
+
+                            // Call our orphan mixin to add it to the orphan train!
+                            +orphan($selector, $property, $value, $media-name)
+
+
+
+
+                        @else
+                            //**************************************************//
+                            //                                                  //
+                            // If out $selector is not a string, output it.     //
+                            //                                                  //
+                            //**************************************************//
+
+                            // Interpoolate out our $selector list with it's unique $property: $value.
+                            #{$selector}
+                                #{$property}: #{$value}
+
+
+
+
+    @else
+        //**************************************************//
+        //                                                  //
+        // $media-name-value is a list. We need to do a for //
+        // loop so we can get to the map.                   //
+        //                                                  //
+        //**************************************************//
+
+        @if $debug-decompile-map
+            @debug media-name-value is a $type
+
+
+
+
+        //**************************************************//
+        //                                                  //
+        // For loop to cycle through all the maps in our    //
+        // $media-name-value list.                          //
+        //                                                  //
+        //**************************************************//
+        @for $i from 1 through length($media-name-value)
+
+
+
+
+            //**************************************************//
+            //                                                  //
+            // Cycling through $media-name-value list via $i    //
+            // and grabbing the $property names to start        //
+            // building our output selectors.                   //
+            //                                                  //
+            //**************************************************//
+            @each $property in map-keys(nth($media-name-value, $i))
+
+                // Get the key, $property-value from our list, $media-name-value index $i, via our value, $property.
+                $property-value: map-get(nth($media-name-value, $i), $property)
+
+                @if $debug-decompile-map
+                    @debug $property-value property-value
+
+                // Grab the type of $property-value
+                $type: type-of($property-value)
+
+
+
+
+                @if $type == map
+                    //**************************************************//
+                    //                                                  //
+                    // Check if $property-value is a map. If so we can  //
+                    // dive right in with map functions.                //
+                    //                                                  //
+                    //**************************************************//
+
+                    @if $debug-decompile-map
+                        @debug property-value is a $type
+
+
+
+
+                    @each $value in map-keys($property-value)
+                        //**************************************************//
+                        //                                                  //
+                        // Cycling through $property-value and grabbing the //
+                        // $value names to start building our output        //
+                        // selectors.                                       //
+                        //                                                  //
+                        //**************************************************//
+
+                        // Get the key, $selector from our map, $property-value, via our value, $value.
+                        $selector: map-get($property-value, $value)
+
+                        @if $debug-decompile-map
+                            @debug $selector value-value
+
+                        // Grab the type of $selector
+                        $type: type-of($selector)
+
+
+
+
+                        @if $type == string
+                            //**************************************************//
+                            //                                                  //
+                            // If out $selector is a string, it's an orphan.    //
+                            //                                                  //
+                            //**************************************************//
+
+                            // Call our orphan mixin to add it to the orphan train!
+                            +orphan($selector, $property, $value, $media-name)
+
+
+
+
+                        @else
+                            //**************************************************//
+                            //                                                  //
+                            // If out $selector is not a string, output it.     //
+                            //                                                  //
+                            //**************************************************//
+
+                            // Interpoolate out our $selector list with it's unique $property: $value.
+                            #{$selector}
+                                #{$property}: #{$value}
+
+
+                @else
+                    //**************************************************//
+                    //                                                  //
+                    // $property-value is a list. We need to do a for   //
+                    // loop so we can get to the map.                   //
+                    //                                                  //
+                    //**************************************************//
+
+                    @if $debug-decompile-map
+                        @debug property-value is a $type
+
+
+
+
+                    //**************************************************//
+                    //                                                  //
+                    // For loop to cycle through all the maps in our    //
+                    // $property-value list.                            //
+                    //                                                  //
+                    //**************************************************//
+                    @for $i from 1 through length($property-value)
+
+
+
+
+                        //**************************************************//
+                        //                                                  //
+                        // Cycling through $property-value list via $i      //
+                        // and grabbing the $value names to start building  //
+                        // our output selectors.                            //
+                        //                                                  //
+                        //**************************************************//
+                        @each $value in map-keys(nth($property-value, $i))
+
+                            // Get the key, $selector from our list, $property-value index $i, via our value, $value.
+                            $selector: map-get(nth($property-value, $i), $value)
+
+                            @if $debug-decompile-map
+                                @debug $selector value-value
+
+                            // Grab the type of $selector
+                            $type: type-of($selector)
+
+
+
+
+                            @if $type == string
+                                //**************************************************//
+                                //                                                  //
+                                // If out $selector is a string, it's an orphan.    //
+                                //                                                  //
+                                //**************************************************//
+
+                                // Call our orphan mixin to add it to the orphan train!
+                                +orphan($selector, $property, $value, $media-name)
+
+
+
+
+                            @else
+                                //**************************************************//
+                                //                                                  //
+                                // If out $selector is not a string, output it.     //
+                                //                                                  //
+                                //**************************************************//
+
+                                // Interpoolate out our $selector list with it's unique $property: $value.
+                                #{$selector}
+                                    #{$property}: #{$value}
+
+
+
+
+
+
+=orphan($selector, $property, $value, $media-name)
+    @if $debug-decompile-map
+        @debug $selector selector is an orphan
+
+
+
+    @if modern-map($orphans, $media-name)
+        //**************************************************//
+        //                                                  //
+        // Check if out $media query size is in our map.    //
+        //                                                  //
+        //**************************************************//
+
+        @if $debug-decompile-map
+            @debug orphans has our $media-name key
+
+        // Get the values from $orphans via the $media-name key
+        $media-name-value: modern-map($orphans, $media-name)
+
+        // Call map-search function to search throuh our $media-name-value
+        // for our $selector
+        $selector-value-list: map-search($media-name-value, $selector)
+
+
+
+
+        @if $selector-value-list
+            //**************************************************//
+            //                                                  //
+            // Check if our $selector is in our                 //
+            // $selector-name-value.                            //
+            //                                                  //
+            //**************************************************//
+
+            @if $debug-decompile-map
+                @debug media-name-value has our $selector key
+
+            // Grab the type of $media-name-value from out $selector-value-list.
+            $media-name-value-type: nth($selector-value-list, 1)
+
+            // Grab $selector-value from out $selector-value-list
+            $selector-value: nth($selector-value-list, 2)
+
+            @if $debug-decompile-map
+                @debug $selector-value selector-value before adding new property value
+
+            // Make a valid map of our $property: $value
+            $map: ($property: $value)
+
+            // Merge our map into $selector-value
+            $selector-value: map-merge($selector-value, $map)
+
+            @if $debug-decompile-map
+                @debug $selector-value selector-value after adding new property value
+                @debug $media-name-value media-name-value before adding new property value
+
+            // Merge our new $selector: $selector-value map into $media-name-value.
+            $media-name-value: map-merge($media-name-value, ($selector: $selector-value))
+
+            @if $debug-decompile-map
+                @debug $media-name-value media-name-value after adding new property value
+                @debug $orphans orphans before adding new property value
+
+            // Merge our new $media-name: $media-name-value map into $orphans.
+            $orphans: map-merge($orphans, ($media-name: $media-name-value)) !global
+
+            @if $debug-decompile-map
+                @debug $orphans orphans after adding new property value
+
+
+
+
+
+        @else
+            //**************************************************//
+            //                                                  //
+            // Our $selector is not in $media-name-value        //
+            //                                                  //
+            //**************************************************//
+
+            @if $debug-decompile-map
+                @debug media-name-value doesnt have our $selector key
+                @debug $media-name-value media-name-value before adding new selector
+
+            $map: ($selector: ($property: $value))
+
+            $media-name-value: map-merge($media-name-value, $map)
+
+            @if $debug-decompile-map
+                @debug $media-name-value media-name-value after adding new selector
+                @debug $orphans orphans before adding new property value
+
+            // Merge our new $media-name: $media-name-value map into $orphans.
+            $orphans: map-merge($orphans, ($media-name: $media-name-value)) !global
+
+            @if $debug-decompile-map
+                @debug $orphans orphans after adding new property value
+
+
+
+
+
+    @else
+        // Our $media query size is not in our map.
+
+        @if $debug-decompile-map
+            @debug orphans doesnt have $media-name key
+
+        // Make a $map with our $selector: ($property: $value)
+        $map: ($media-name: ($selector: ($property: $value)))
+
+        // Merge $map into $orphans, make it global
+        $orphans: map-merge($orphans, $map) !global
+
+        @if $debug-decompile-map
+            @debug $orphans map if media isnt in orphans
+
+
+// $orphans: (
+//     media-name: (
+//         selector: (
+//             property: value,
+//             property: value
+//         )
+//     )
+// )
