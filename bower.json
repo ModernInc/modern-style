@@ -1,0 +1,29 @@
+{
+  "name": "modern-style",
+  "description": "Modern Style, a framework for optimizing SASS on web applications and sites.",
+  "version": "1.2",
+  "main": "app/assets/stylesheets/modern-map.sass",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "CONTRIBUTING.md",
+    "LICENSE.md",
+    "package.json"
+  ],
+  "keywords": [
+    "css",
+    "mixins",
+    "sass",
+    "scss"
+  ],
+  "authors": [
+    "Izak Filmalter (http://twitter.com/izakfilmalter)"
+  ],
+  "homepage": "https://github.com/ModernInc/modern-style",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ModernInc/modern-style.git"
+  }
+}
