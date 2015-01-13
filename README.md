@@ -27,10 +27,17 @@ http://bem.info/
 
 
 ## Version
+- v1.1
+ - Media Query Support
+   - min-width
+    - max-width
+ - 219 Properties added. 
+ - Better README.md
 - v1.0
  -  Folder layout done.
  - Mostly working Modern-Map that auto optimizes output CSS.
  - A Sass version of Normalize.
+
 
 
 
