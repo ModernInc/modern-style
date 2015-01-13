@@ -1,6 +1,6 @@
 {
   "name": "Modern-Style",
-  "version": "1.0.0",
+  "version": "1.2",
   "repository": "https://github.com/ModernInc/modern-style",
   "devDependencies": {
     "grunt": "^v0.4.5",
