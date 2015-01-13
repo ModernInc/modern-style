@@ -6,11 +6,11 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
-    "node_modules",
-    "bower_components",
     "CONTRIBUTING.md",
     "LICENSE.md",
-    "package.json"
+    "package.json",
+    "root",
+    "template.js"
   ],
   "keywords": [
     "css",
