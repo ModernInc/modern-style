@@ -1,4 +1,4 @@
-# Modern Style
+# Modern Style (WIP)
 
 Modern Style is a Sass framework and style guide.
 
