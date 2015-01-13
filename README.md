@@ -108,20 +108,20 @@ The following is our output from Modern Map. As you can see everything that coul
 
 ```css
 .foo, .bar {
-  display: block;
+    display: block;
 }
 
 .foo, .bar {
-  padding: 30px;
+    padding: 30px;
 }
 
 .foo {
-  color: #fff;
-  margin: 15px;
+    color: #fff;
+    margin: 15px;
 }
 
 .bar {
-  color: #000;
+    color: #000;
 }
 
 ```
