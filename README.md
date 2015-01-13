@@ -130,19 +130,19 @@ In the [`_helpers_variables.sass`](https://github.com/ModernInc/modern-style/blo
 
 ```sass
 $breakpoints: (
-    PcMdMax: (max: #{$PcMd-width-max}),
-    PcSmMax: (max: #{$PcSm-width-max}),
+    PcMdMax: (max-width: #{$PcMd-width-max}),
+    PcSmMax: (max-width: #{$PcSm-width-max}),
 
-    TabLgMax: (max: #{$TabLg-width-max}),
-    TabMdMax: (max: #{$TabMd-width-max}),
-    TabSmMax: (max: #{$TabSm-width-max}),
+    TabLgMax: (max-width: #{$TabLg-width-max}),
+    TabMdMax: (max-width: #{$TabMd-width-max}),
+    TabSmMax: (max-width: #{$TabSm-width-max}),
 
-    PhnLgMax: (max: #{$PhnLg-width-max}),
-    PhnMdMax: (max: #{$PhnMd-width-max}),
-    PhnSmMax: (max: #{$PhnSm-width-max})
+    PhnLgMax: (max-width: #{$PhnLg-width-max}),
+    PhnMdMax: (max-width: #{$PhnMd-width-max}),
+    PhnSmMax: (max-width: #{$PhnSm-width-max})
 )
 ```
-These are the standard Media Queries that I like and there is an explination about them in the wiki. Puting styles in a Media Query is as simple as the following:
+These are the standard Media Queries that I like and there is an explanation about them in the wiki. Punting styles in a Media Query is as simple as the following:
 
 ```sass
 $media-name: none
@@ -155,6 +155,8 @@ $media-name: PhnLgMax
 ```
 
 The `$media-name` variable defines which media query your styles will be in. It will then reference the `$breakpoints` map to find it's min and or max values and output your styles properly. Of note here is the `$default-media-name`. This is set to `null` and can be changed if you want. To place styles outside of a media query make sure that `$media-name` is redefined to `null`. You no longer need to group your media query styles for a specific breakpoint together. Modern Map will make sure that they output with in the smallest amount of media queries.
+
+Note: for now Modern Map just supports min-width and max-width media queries. We will eventually be feature complete with the media query spec.
 
 ## Questions
 If you have any feel free to tweet me [@izakfilmalter](https://twitter.com/IzakFilmalter)
