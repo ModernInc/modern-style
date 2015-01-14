@@ -10,7 +10,8 @@
     "LICENSE.md",
     "package.json",
     "root",
-    "template.js"
+    "template.js",
+    "generator-modern-style"
   ],
   "keywords": [
     "css",
