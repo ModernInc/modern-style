@@ -47,6 +47,7 @@ http://bem.info/
 - Grunt.js
 - Bower.js
 
+#### Grunt Init Install - Modern Style Scafold & Modern Map API
 #####1. Make a Grunt Init
 Clone Modern Style into your .grunt-init
 
@@ -69,18 +70,32 @@ $ npm install
 $ bower install
 ```
 
-## File Tree
+####Bower Install - Modern Map API
+
+#####1. Install It
+```sh
+$ bower install modern-map
+```
+
+Make sure your root Sass file imports it first and runs this mixin at the end:
+```sass
+@import "path to modern-map"/modern-map
+
+All your imports and styles.
+
+// Call our decompile-modern-map mixin. DO NOT DELETE THIS LINE!
++decompile-modern-map
+```
+
+## Scaffold
 - sass
  - components - BEM
  - element - Element overrides
  - grid - Grid Styles
- - helpers - Global helpers and Modern-Map
+ - helpers - Global helpers
  - normalize - Normalize v3.0.2
  - typography - Global Typography Styles
  - vendor - Vendor styles go here.
-- www
- - css
- - index.html
 
 More info can be found in the wiki in the future.
 
