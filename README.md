@@ -42,36 +42,32 @@ http://bem.info/
 
 
 ## Installation
-#####1. Sass
-You will need to be running the Ruby Gem for Sass >=v3.4.9
-Run the following to figure out if your Sass is up to date.
+##### Requirements:
+- Sass Ruby Gem >=v3.4.9
+- Grunt.js
+- Bower.js
+
+#####1. Make a Grunt Init
+Clone Modern Style into your .grunt-init
+
 ```sh
-$ sass -v
+$ git clone git://github.com/ModernInc/modern-style ~/.grunt-init/modern-style
 ```
 
-If you do not have Sass installed go to [http://sass-lang.com/install](http://sass-lang.com/install) and follow the instructions for Command Line.
-#####2. Grunt
-First check if you have Grunt installed.
+#####2. Make your project folder.
+
 ```sh
-$ grunt -version
+$ mkdir project
+$ cd project
+$ grunt-init modern-style
 ```
 
-If you don't, install it via npm.
-```sh
-$ npm install -g grunt-cli
-```
+#####3. Install Dependancies.
 
-#####3. Clone Repo and Run!
-This will get your basic project up and running. There is no server, no boilerplate, no bloat. This is just a Sass framework that compiles your Sass and also runs [auto-prefixer](https://github.com/postcss/autoprefixer).
 ```sh
-$ git clone https://github.com/ModernInc/modern-style.git modern-style
-$ cd modern-style
 $ npm install
-$ grunt
+$ bower install
 ```
-
-
-
 
 ## File Tree
 - sass
