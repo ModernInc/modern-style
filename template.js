@@ -44,7 +44,7 @@ exports.template = function(grunt, init, done) {
       description: props.description,
       version: props.version,
       devDependencies: {
-        "modern-map": "^v1.2"
+        "modern-map": ""
       }
     });
 
