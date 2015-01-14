@@ -85,7 +85,7 @@ More info can be found in the wiki in the future.
 ## Modern Map Api
 
 ####1. Properties
-[219 propertys](https://github.com/ModernInc/modern-style/blob/master/sass/helpers/modern-map/properties/properties.sass) are built into Modern Style out of the box. To call Modern Map, call a mixin named after the property you want and then send your value. Bellow is an example of two components and some `+property(value)` combos.
+[219 properties](https://github.com/ModernInc/modern-style/blob/master/sass/helpers/modern-map/properties/properties.sass) are built into Modern Style out of the box. To call Modern Map, call a mixin named after the property you want and then send your value. Bellow is an example of two components and some `+property(value)` combos.
 ```sass
 .foo
     +color(#fff)
