@@ -1,0 +1,14 @@
+{
+  "name": "generator-modern-style",
+  "version": "0.1.2",
+  "description": "Modern Style, a framework for optimizing SASS on web applications and sites. ",
+  "keywords": [
+    "yeoman-generator",
+    "sass",
+    "scss",
+    "css"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^0.17.3"
+  }
+}
